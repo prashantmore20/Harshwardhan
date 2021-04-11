@@ -1,0 +1,85 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-1">
+        <div class="col-md-12 col-sm-12 p-4">
+            <form method="POST">
+                {% csrf_token %}
+                    <div class="row justify-content-center">
+                        {% for item in menu_items %}
+                        <div class="col-md-3 col-sm-12 text-center mt-2">
+                            <img class = "rounded " src="{{ item.image.url }}" width="200" height="200" alt="image">
+                            <h5 class="mt-3">{{ item.name }}</h5>
+                            <p>Price: {{ item.price }}</p>
+                            <p>{{ item.discription }}</p>
+                            <input type="checkbox" name="items[]" class="form-check-input" value="{{ item.pk }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group pt-3">
+                        <label for="name">Full Name</label>
+                        <input required class="form-control" type="text" placeholder="Your Name" name="name"/>
+                    </div>
+
+                    <div class="form-group pt-3">
+                        <label for="email">Email Address</label>
+                        <input required class="form-control" type="email" placeholder="Your email" name="email"/>
+                    </div>
+                
+                    <div class="form-group pt-3">
+                        <label for="street">Street Address</label>
+                        <input required class="form-control" type="text" placeholder="Your Street Address" name="street"/>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group pt-3">
+                                <label for="city">City</label>
+                                <input required class="form-control" type="text" placeholder="Your City Name" name="city"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group pt-3">
+                                <label for="state">State</label>
+                                <input required class="form-control" type="text" placeholder="Your State" name="state"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group pt-3">
+                                <label for="zip">Pin Code</label>
+                                <input required class="form-control" type="text" placeholder="Your PinCode" name="zip"/>
+                            </div>
+                        </div>        
+                    </div>
+                <!-- Button trigger modal -->
+                <div class="mt-3">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#submitModal">
+                        Submit Order!!
+                    </button>
+                </div>
+                <!-- <button class="btn btn-dark mt-5">Place Order!</button> -->
+                <!-- Modal -->
+                <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="submitModalLabel">Submit Your Order!!!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Go Back..</button>
+                            <button type="submit" class="btn btn-dark">Place Order!!</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
